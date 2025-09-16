@@ -8,4 +8,6 @@ Caso venha a ser necessário o uso de multiplos repositórios para acomodar o de
 
 Documentos e links relevantes:
 
-- [Proposta de TCC]('docs/Proposta_TCC_Vicente_Hofmeister.pdf')
+- [Proposta de TCC](docs/Proposta_TCC_Vicente_Hofmeister.pdf)
+- [Prototipação de telas](https://www.figma.com/files/team/1549549302352139474/project/452815529/Team-project?fuid=1141497352854255981)
+- [Arquitetura do banco de dados (SQL)](https://dbdiagram.io/d/68c8b76f1ff9c616bdd1aaa8)
