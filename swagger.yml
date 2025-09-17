@@ -1,0 +1,146 @@
+openapi: "3.0.3"
+info:
+  title: Safe Travels' Endpoints
+  version: "1.0.0"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+servers:
+  - url: https://api.server.test/v1 # TODO: Replace with actual server url
+
+paths:
+  /auth/login:
+    post:
+      summary: Authenticate user to access the API
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: john.doe@example.com
+                password:
+                  type: string
+                  format: password
+                  example: MyPassword@123
+      responses:
+        "200":
+          description: Login was successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                  expires_in:
+                    type: integer
+                    example: 3600
+        "401":
+          description: Invalid credentials
+  /auth/refresh:
+    post:
+      summary: Use refresh token to revalidate authentication
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [refreshToken]
+              properties:
+                refreshToken:
+                  type: string
+                  example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+      responses:
+        "200":
+          description: Session refreshed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                  expires_in:
+                    type: integer
+                    example: 3600
+
+  /auth/logout:
+    post:
+      summary: Revokes the user authentication
+      security: [bearerAuth: []]
+      responses:
+        "204":
+          description: Logout was successful
+
+  /auth/register:
+    post:
+      summary: Register a new user
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, email, password]
+              properties:
+                name:
+                  type: string
+                  example: "John Doe"
+                email:
+                  type: string
+                  format: email
+                  example: john.doe@example.com
+                password:
+                  type: string
+                  format: password
+                  example: MyPassword@123
+      responses:
+        "201":
+          description: User registered
+        "400":
+          description: Invalid credentials
+        "409":
+          description: There is another user with these credentials
+
+  /auth/forgot-password:
+    post:
+      summary: User requests code to change password
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: john.doe@example.com
+      responses:
+        "200":
+          description: If there is an account with this e-mail, a code will be sent
+        "400":
+          description: Invalid e-mail
+  /auth/reset-password:
+  /auth/change-password:
+  /auth/validate-email:
+  /auth/validate-phone:
+  /auth/register-device:
