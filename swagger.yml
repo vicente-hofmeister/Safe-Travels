@@ -50,6 +50,11 @@ paths:
                     example: 3600
         "401":
           description: Invalid credentials
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
+
   /auth/refresh:
     post:
       summary: Use refresh token to revalidate authentication
@@ -78,6 +83,16 @@ paths:
                   expires_in:
                     type: integer
                     example: 3600
+        "401":
+          description: unauthorized
+        "403":
+          description: Forbidden. User logged out
+        "410":
+          description: Expired refresh token
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
 
   /auth/logout:
     post:
@@ -86,6 +101,10 @@ paths:
       responses:
         "204":
           description: Logout was successful
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
 
   /auth/register:
     post:
@@ -117,6 +136,10 @@ paths:
           description: Invalid credentials
         "409":
           description: There is another user with these credentials
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
 
   /auth/forgot-password:
     post:
@@ -139,8 +162,183 @@ paths:
           description: If there is an account with this e-mail, a code will be sent
         "400":
           description: Invalid e-mail
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
+
   /auth/reset-password:
+    post:
+      summary: User sends it's reset code and new password to confirm password change
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password, resetCode]
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: john.doe@example.com
+                password:
+                  type: string
+                  format: password
+                  example: MyPassword@123
+                resetCode:
+                  type: string
+                  example: "123456"
+      responses:
+        "200":
+          description: Password reseted successfully
+        "400":
+          description: Invalid credentials
+        "401":
+          description: Invalid code
+        "410":
+          description: Expired code
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
+
   /auth/change-password:
-  /auth/validate-email:
-  /auth/validate-phone:
+    post:
+      summary: Authenticated user changes it's password
+      security: [bearerAuth: []]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [newPassword]
+              properties:
+                newPassword:
+                  type: string
+                  format: password
+                  example: MyPassword@123
+      responses:
+        "200":
+          description: Password changed successfully
+        "400":
+          description: Invalid password
+        "401":
+          description: User unauthorized
+        "409":
+          description: New password is the same as the old one
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
+
+  /auth/verify-email:
+    post:
+      summary: User verifies it's e-mail confirming given code
+      security: [bearerAuth: []]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, code]
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: john.doe@example.com
+                code:
+                  type: string
+                  example: "123456"
+      responses:
+        "200":
+          description: E-mail verified
+        "400":
+          description: Invalid credentials
+        "410":
+          description: Expired code
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
+
+  /auth/verify-phone:
+    post:
+      summary: User verifies it's phone confirming given code
+      security: [bearerAuth: []]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [phone, code]
+              properties:
+                phone:
+                  type: string
+                  pattern: '^\+[1-9]\d{1,14}$'
+                  example: "+5551987654321"
+                code:
+                  type: string
+                  example: "123456"
+      responses:
+        "200":
+          description: Phone verified
+        "400":
+          description: Invalid credentials
+        "410":
+          description: Expired code
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
+
   /auth/register-device:
+    post:
+      summary: Register a new location device to a user
+      security: [bearerAuth: []]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - type
+                - value
+              properties:
+                type:
+                  type: string
+                  enum: [email, phone]
+                  example: email
+                value:
+                  type: string
+                  description: E-mail or phone in internacional pattern (E.164)
+                  example: "+55 51 99999-9999"
+      responses:
+        "201":
+          description: Device successfully registered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                    example: "c21f969b-5f03-4333-9a9d-6a5566e8a5e7"
+                  type:
+                    type: string
+                  value:
+                    type: string
+        "400":
+          description: Invalid data
+        "409":
+          description: Device already registered
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
