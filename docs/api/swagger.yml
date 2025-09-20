@@ -24,12 +24,11 @@ paths:
           application/json:
             schema:
               type: object
-              required: [email, password]
+              required: [username, password]
               properties:
-                email:
+                username:
                   type: string
-                  format: email
-                  example: john.doe@example.com
+                  example: john-doe
                 password:
                   type: string
                   format: password
@@ -116,11 +115,14 @@ paths:
           application/json:
             schema:
               type: object
-              required: [name, email, password]
+              required: [name, username, email, password]
               properties:
                 name:
                   type: string
                   example: "John Doe"
+                username:
+                  type: string
+                  example: john-doe
                 email:
                   type: string
                   format: email
@@ -151,17 +153,20 @@ paths:
           application/json:
             schema:
               type: object
-              required: [email]
+              required: [username, email]
               properties:
+                username:
+                  type: string
+                  example: john-doe
                 email:
                   type: string
                   format: email
                   example: john.doe@example.com
       responses:
         "200":
-          description: If there is an account with this e-mail, a code will be sent
+          description: If there is an account with this username and e-mail, a code will be sent
         "400":
-          description: Invalid e-mail
+          description: Invalid credentials
         "429":
           description: Too many requests
         "500":
@@ -177,9 +182,12 @@ paths:
           application/json:
             schema:
               type: object
-              required: [email, password, resetCode]
+              required: [username, email, password, resetCode]
               properties:
-                email:
+                username:
+                  type: string
+                  example: john-doe
+                email: # usar aqui???
                   type: string
                   format: email
                   example: john.doe@example.com
@@ -342,3 +350,25 @@ paths:
           description: Too many requests
         "500":
           description: Internal server error
+
+  /social/user/set-privacy:
+  /social/user/ask-to-follow:
+  /social/user/accept-follow:
+  /social/user/change-follower-tier:
+  /social/user/remove-follower:
+  /social/group/create:
+  /social/group/invite:
+  /social/group/respond-invite:
+  /social/group/leave:
+  /social/group/set-group-privacy: # privacidade do grupo quanto a usuarios externos
+  /social/group/set-user-privacy: # privacidade do membro quanto ao grupo
+  /social/group/ask-to-follow:
+  /social/group/accept-follower:
+  /social/group/remove-follower:
+
+  /data-ingestion/send-custom-loc: # dado de loc customizado pelo usuario
+  /data-ingestion/send-loc-batch: # varios dados de uma vez
+  /data-ingestion/sync-loc: # usar???
+
+  /data-consumption/user/get-loc:
+  /data-consumption/group/get-loc:
