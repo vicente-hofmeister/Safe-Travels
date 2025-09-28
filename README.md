@@ -12,6 +12,6 @@ Documentos e links relevantes:
 - [Endpoints da API](docs/api/swagger.yml)
 - [Arquitetura do banco de dados (SQL)](docs/database/sql_database_model.dbml)
 - [Prototipação de telas](https://www.figma.com/files/team/1549549302352139474/project/452815529/Team-project?fuid=1141497352854255981)
-- [Diagrama de arquitetura da API (rascunho)](docs/architecture/API_architecture_diagram-draft.jpg)
-- [Diagrama da unidade computacional da API (rascunho)](docs/architecture/API_computational_unit_diagram-draft.jpg)
+- [Diagrama de arquitetura da API (rascunho)](docs/architecture/api_architecture_diagram-draft.jpg)
+- [Diagrama da unidade computacional da API (rascunho)](docs/architecture/api_computational_unit_diagram-draft.jpg)
 - [One Drive com outros documentos](https://brpucrs-my.sharepoint.com/:f:/g/personal/v_hofmeister_edu_pucrs_br/Em8yZYhOW4xBpY9jZeVMPYoBS6WAZFX58U5XdOPTQgsgyw?e=eg4fgu)
