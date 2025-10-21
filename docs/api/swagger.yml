@@ -356,6 +356,7 @@ paths:
   /social/user/accept-follow:
   /social/user/change-follower-tier:
   /social/user/remove-follower:
+  /social/user/list-trips:
   /social/group/create:
   /social/group/invite:
   /social/group/respond-invite:
@@ -365,10 +366,10 @@ paths:
   /social/group/ask-to-follow:
   /social/group/accept-follower:
   /social/group/remove-follower:
+  /social/group/list-trips:
 
-  /data-ingestion/send-custom-loc: # dado de loc customizado pelo usuario
-  /data-ingestion/send-loc-batch: # varios dados de uma vez
-  /data-ingestion/sync-loc: # usar???
+  /data-ingest/send-custom-loc: # dado de loc customizado pelo usuario
+  /data-ingest/send-loc-batch: # varios dados de uma vez
 
-  /data-consumption/user/get-loc:
-  /data-consumption/group/get-loc:
+  /data-fetch/user/get-loc:
+  /data-fetch/group/get-loc:
