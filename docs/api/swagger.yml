@@ -357,6 +357,8 @@ paths:
   /social/user/change-follower-tier:
   /social/user/remove-follower:
   /social/user/list-trips:
+  /social/user/list-trips:
+
   /social/group/create:
   /social/group/invite:
   /social/group/respond-invite:
@@ -368,8 +370,9 @@ paths:
   /social/group/remove-follower:
   /social/group/list-trips:
 
-  /data-ingest/send-custom-loc: # dado de loc customizado pelo usuario
-  /data-ingest/send-loc-batch: # varios dados de uma vez
+  /data-ingest/send-loc: # envia loc unica. Testar performance comparado com kinesis.
+  /data-ingest/send-loc-batch: # varios dados de uma vez (sync após ficar sem sinal por muito tempo)
 
-  /data-fetch/user/get-loc:
-  /data-fetch/group/get-loc:
+  /data-fetch/get-loc/user/{user_id}:
+  /data-fetch/get-loc/group/{group_id}:
+  /data-fetch/get-loc/trip/{trip_id}:

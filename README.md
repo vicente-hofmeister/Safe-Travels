@@ -13,6 +13,7 @@ Caso venha a ser necessário o uso de multiplos repositórios para acomodar o de
 - [Proposta de TCC](docs/volumes/Proposta_TCC_Vicente_Hofmeister.pdf)
 - [Endpoints da API](docs/api/swagger.yml)
 - [Arquitetura do banco de dados (SQL)](docs/database/sql_database_model.dbml)
+- [Diagrama de modelagem do banco de dados (SQL)](docs/database/sql_diagram_light.png)
 - [Prototipação de telas](https://www.figma.com/files/team/1549549302352139474/project/452815529/Team-project?fuid=1141497352854255981)
 - [Diagrama de arquitetura da API](docs/architecture/api_architecture_diagram_v1.png)
 - [Diagrama da unidade computacional da API](docs/architecture/api_computational_unit_diagram_v1.png)
