@@ -11,6 +11,7 @@ Caso venha a ser necessário o uso de multiplos repositórios para acomodar o de
 ## Documentos e links relevantes:
 
 - [Proposta de TCC](docs/volumes/Proposta_TCC_Vicente_Hofmeister.pdf)
+- [Overleaf Volume Final TCC I](https://pt.overleaf.com/read/njvdmjmbsqmz#5db9e7)
 - [Endpoints da API](docs/api/swagger.yml)
 - [Arquitetura do banco de dados (SQL)](docs/database/sql_database_model.dbml)
 - [Diagrama de modelagem do banco de dados (SQL)](docs/database/sql_diagram_light.png)
@@ -21,10 +22,10 @@ Caso venha a ser necessário o uso de multiplos repositórios para acomodar o de
 
 ## TO-DO
 
-- [ ] Criar documento para volume final de TCC 1
+- [x] Criar documento para volume final de TCC 1
 - [ ] Finalizar planejamento de database
-  - [ ] Finalizar mapeamento SQL
-    - [ ] Adicionar trips
+  - [x] Finalizar mapeamento SQL
+    - [x] Adicionar trips
   - [ ] Fazer mapeamento noSQL
   - [ ] Documentar / escrever sobre
 - [ ] Finalizar prototipação de telas
