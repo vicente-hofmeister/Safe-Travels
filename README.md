@@ -1,12 +1,15 @@
-# Safe Travels
+# Safe Travels - Wiki
 
 ## Introdução
 
-Repositório destinado a elaboração do Trabalho de Conclusão de Curso (TCC) de Sistemas de Informação do aluno Vicente Hofmeister pela Pontifícia Universidade Católica do Rio Grande do Sul (PUCRS), com orientação do Prof. Me. Filipo Novo Mor.
+Repositório destinado ao registro da elaboração do Trabalho de Conclusão de Curso (TCC) de Sistemas de Informação do aluno Vicente Hofmeister pela Pontifícia Universidade Católica do Rio Grande do Sul (PUCRS), com orientação do Prof. Me. Filipo Novo Mor.
 
 Este trabalho propõe o desenvolvimento de um sistema colaborativo para compartilhamento de dados de localização em tempo real durante viagens em grupo, enfrentando limitações de conectividade e garantindo maior segurança e privacidade na integração das informações.
 
-Caso venha a ser necessário o uso de multiplos repositórios para acomodar o desenvolvimento do trabalho, este repositório será utilizado como Wiki, inclusive referenciando os demais repositórios.
+O presente repositório serve o papel de Wiki. Para acompanhar o desenvolvimento da API e da aplicação mobile, acesse os respectivos repositórios:
+
+- [Safe Travels - API](https://github.com/vicente-hofmeister/Safe-Travels-API)
+- [Safe Travels - Apliação Mobile](https://github.com/vicente-hofmeister/Safe-Travels-Mobile)
 
 ## Documentos e links relevantes:
 
@@ -26,7 +29,6 @@ Caso venha a ser necessário o uso de multiplos repositórios para acomodar o de
 - [ ] Finalizar planejamento de database
   - [x] Finalizar mapeamento SQL
     - [x] Adicionar trips
-  - [ ] Fazer mapeamento noSQL
   - [ ] Documentar / escrever sobre
 - [ ] Finalizar prototipação de telas
   - [ ] Telas
