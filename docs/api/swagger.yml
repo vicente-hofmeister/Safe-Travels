@@ -351,28 +351,154 @@ paths:
         "500":
           description: Internal server error
 
-  /social/user/set-privacy:
-  /social/user/ask-to-follow:
-  /social/user/accept-follow:
-  /social/user/change-follower-tier:
-  /social/user/remove-follower:
-  /social/user/list-trips:
-  /social/user/list-trips:
+  /user/get-profile/{user_id}:
+    get:
+      summary: Get a user's profile information
+      security: [bearerAuth: []]
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: UUID of the user
+          schema:
+            type: string
+            format: uuid
+            example: "c21f969b-5f03-4333-9a9d-6a5566e8a5e7"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_id:
+                    type: string
+                    format: uuid
+                    example: "c21f969b-5f03-4333-9a9d-6a5566e8a5e7"
+                  username:
+                    type: string
+                    example: john-doe
+                  name:
+                    type: string
+                    example: "John Doe"
+                  profile_image:
+                    type: string
+                    format: uri
+                    example: "https://example.com/uploads/profile-picture.png"
+        "400":
+          description: Invalid id
+        "401":
+          description: unauthorized
+        "403":
+          description: Forbidden. User can't fetch this information
+        "404":
+          description: User not found.
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
 
-  /social/group/create:
-  /social/group/invite:
-  /social/group/respond-invite:
-  /social/group/leave:
-  /social/group/set-group-privacy: # privacidade do grupo quanto a usuarios externos
-  /social/group/set-user-privacy: # privacidade do membro quanto ao grupo
-  /social/group/ask-to-follow:
-  /social/group/accept-follower:
-  /social/group/remove-follower:
-  /social/group/list-trips:
+  /user/set-privacy:
+    post:
+      summary: Defines privacy settings
+      security: [bearerAuth: []]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: privacy settings updated successfully
+        "400":
+          description: Invalid privacy settings
+        "401":
+          description: unauthorized
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
 
-  /data-ingest/send-loc: # envia loc unica. Testar performance comparado com kinesis.
-  /data-ingest/send-loc-batch: # varios dados de uma vez (sync após ficar sem sinal por muito tempo)
+  /user/ask-to-follow/{user_id}:
+    get:
+      summary: Ask to follow another user
+      security: [bearerAuth: []]
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: UUID of the user
+          schema:
+            type: string
+            format: uuid
+            example: "c21f969b-5f03-4333-9a9d-6a5566e8a5e7"
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid id
+        "401":
+          description: unauthorized
+        "404":
+          description: User not found.
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
 
-  /data-fetch/get-loc/user/{user_id}:
-  /data-fetch/get-loc/group/{group_id}:
-  /data-fetch/get-loc/trip/{trip_id}:
+  /user/accept-follow/{user_id}:
+    get:
+      summary: Accept another user's request to follow
+      security: [bearerAuth: []]
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: UUID of the user
+          schema:
+            type: string
+            format: uuid
+            example: "c21f969b-5f03-4333-9a9d-6a5566e8a5e7"
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid id
+        "401":
+          description: unauthorized
+        "404":
+          description: User or request not found.
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
+
+  /user/change-follower-tier:
+    post:
+
+  /user/remove-follower/{user_id}:
+  /user/stop_following/{user_id}:
+  /user/get-location/{user_id}:
+  /user/send-location:
+
+  /group/create:
+  /group/invite:
+  /group/respond-invite:
+  /group/remove-member/{user_id}:
+  /group/leave/{group_id}:
+  /group/set-group-privacy: # privacidade do grupo quanto a usuarios externos
+  /group/set-user-privacy: # privacidade do membro quanto ao grupo
+  /group/ask-to-follow/{group_id}:
+  /group/accept-follower/{user_id}:
+  /group/remove-follower/{user_id}:
+  /group/stop_following/{group_id}:
+  /group/get-location/{group_id}:
+
+  /trip/get-trip-sumary/{trip_id}:
+  /trip/get-trip-details/{trip_id}:
+  /trip/list-trips/user/{user_id}:
+  /trip/list-trips/group/{group_id}:
+  /trip/get-user-current-trip/{user_id}:
+  /trip/get-group-current-trip/{group_id}:
