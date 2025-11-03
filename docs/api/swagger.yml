@@ -477,19 +477,323 @@ paths:
 
   /user/change-follower-tier:
     post:
+      summary: Change the follower category
+      security: [bearerAuth: []]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: invalid payload
+        "401":
+          description: unauthorized
+        "404":
+          description: Follower not found.
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
 
   /user/remove-follower/{user_id}:
+    delete:
+      summary: Remove another user from the list of followers of the user who made the request
+      security: [bearerAuth: []]
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: UUID of the user to be removed
+          schema:
+            type: string
+            format: uuid
+            example: "c21f969b-5f03-4333-9a9d-6a5566e8a5e7"
+      responses:
+        "200":
+          description: Follower removed successfully
+        "400":
+          description: Invalid id
+        "401":
+          description: unauthorized
+        "404":
+          description: Follower not found.
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
+
   /user/stop_following/{user_id}:
+    delete:
+      summary: Stop following another user
+      security: [bearerAuth: []]
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: UUID of the user
+          schema:
+            type: string
+            format: uuid
+            example: "c21f969b-5f03-4333-9a9d-6a5566e8a5e7"
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid id
+        "401":
+          description: unauthorized
+        "404":
+          description: User not found.
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
+
   /user/get-location/{user_id}:
+    get:
+      summary: Get a user's current location. Granularity depends on the following tier.
+      security: [bearerAuth: []]
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: UUID of the user
+          schema:
+            type: string
+            format: uuid
+            example: "c21f969b-5f03-4333-9a9d-6a5566e8a5e7"
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid id
+        "401":
+          description: unauthorized
+        "403":
+          description: Doesn't have permission to get the user location
+        "404":
+          description: User not found.
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
+
   /user/send-location:
+    post:
+      summary: Send location information to the API. May be single data or batch. Asynchronous processing for faster response.
+      security: [bearerAuth: []]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: invalid payload
+        "401":
+          description: unauthorized
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
 
   /group/create:
+    post:
+      summary: Creates a new group_id
+      security: [bearerAuth: []]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: Group created
+        "400":
+          description: Invalid payload
+        "401":
+          description: unauthorized
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
+
   /group/invite:
+    post:
+      summary: Invite an user to be part of a group
+      security: [bearerAuth: []]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: Invite sent
+        "400":
+          description: invalid payload
+        "401":
+          description: unauthorized
+        "403":
+          description: User is not allowed to invite to this group
+        "404":
+          description: User or group not found.
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
+
   /group/respond-invite:
-  /group/remove-member/{user_id}:
+    post:
+      summary: Respond an invite to join a group
+      security: [bearerAuth: []]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: Response sent (accept or deny)
+        "400":
+          description: invalid payload
+        "401":
+          description: unauthorized
+        "404":
+          description: Group or invite not found.
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
+
+  /group/remove-member/{group_id}/{user_id}:
+    delete:
+      summary: Remove another user from the list of members of a group who made the request
+      security: [bearerAuth: []]
+      parameters:
+        - name: group_id
+          in: path
+          required: true
+          description: UUID of the group
+          schema:
+            type: string
+            format: uuid
+            example: "c21f969b-5f03-4333-9a9d-6a5566e8a5e7"
+        - name: user_id
+          in: path
+          required: true
+          description: UUID of the user to be removed
+          schema:
+            type: string
+            format: uuid
+            example: "c21f969b-5f03-4333-9a9d-6a5566e8a5e7"
+      responses:
+        "200":
+          description: Member removed successfully
+        "400":
+          description: Invalid id
+        "401":
+          description: unauthorized
+        "403":
+          description: User doesn't have permission to remove members from this group
+        "404":
+          description: Member or group not found.
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
+
   /group/leave/{group_id}:
-  /group/set-group-privacy: # privacidade do grupo quanto a usuarios externos
-  /group/set-user-privacy: # privacidade do membro quanto ao grupo
+    delete:
+      summary: Leave a group
+      security: [bearerAuth: []]
+      parameters:
+        - name: group_id
+          in: path
+          required: true
+          description: UUID of the group
+          schema:
+            type: string
+            format: uuid
+            example: "c21f969b-5f03-4333-9a9d-6a5566e8a5e7"
+      responses:
+        "200":
+          description: User is no longer member of the group
+        "400":
+          description: Invalid id
+        "401":
+          description: unauthorized
+        "403":
+          description: User isn't part of the group
+        "404":
+          description: Group not found.
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
+
+  /group/set-group-privacy:
+    post:
+      summary: Defines the group privacy settings
+      security: [bearerAuth: []]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: group privacy settings updated successfully
+        "400":
+          description: Invalid privacy settings
+        "401":
+          description: unauthorized
+        "403":
+          description: User doesn't have permission to change the group privacy settings (isn't admin/owner)
+        "404":
+          description: Group not found
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
+
+  /group/set-user-privacy:
+    post:
+      summary: Defines a user privacy setting regarding a specific group.
+      security: [bearerAuth: []]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: member privacy settings updated successfully
+        "400":
+          description: Invalid privacy settings
+        "401":
+          description: unauthorized
+        "403":
+          description: User isn't a group member.
+        "404":
+          description: Group not found.
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
+
   /group/ask-to-follow/{group_id}:
   /group/accept-follower/{user_id}:
   /group/remove-follower/{user_id}:
