@@ -448,7 +448,7 @@ paths:
         "500":
           description: Internal server error
 
-  /user/accept-follow/{user_id}:
+  /user/accept-follower/{user_id}:
     get:
       summary: Accept another user's request to follow
       security: [bearerAuth: []]
@@ -795,14 +795,322 @@ paths:
           description: Internal server error
 
   /group/ask-to-follow/{group_id}:
+    get:
+      summary: Ask to follow a group
+      security: [bearerAuth:[]]
+      parameters:
+        - name: group_id
+          in: path
+          required: true
+          description: UUID of the group
+          schema:
+            type: string
+            format: uuid
+            example: "c21f969b-5f03-4333-9a9d-6a5566e8a5e7"
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid id
+        "401":
+          description: Unauthorized
+        "404":
+          description: Group not found.
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
+  
   /group/accept-follower/{user_id}:
-  /group/remove-follower/{user_id}:
+    get:
+      summary: Accept another user's request to follow
+      security: [bearerAuth: []]
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: UUID of the user
+          schema:
+            type: string
+            format: uuid
+            example: "c21f969b-5f03-4333-9a9d-6a5566e8a5e7"
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid id
+        "401":
+          description: unauthorized
+        "404":
+          description: User or request not found.
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
+  
+  /group/remove-follower/{group_id}/{user_id}:
+    delete:
+      summary: Remove an user from the list of followers of the group
+      security: [bearerAuth: []]
+      parameters:
+        - name: group_id
+          in: path
+          required: true
+          description: UUID of the group
+          schema:
+            type: string
+            format: uuid
+            example: "c21f969b-5f03-4333-9a9d-6a5566e8a5e7"
+        - name: user_id
+          in: path
+          required: true
+          description: UUID of the user to be removed
+          schema:
+            type: string
+            format: uuid
+            example: "c21f969b-5f03-4333-9a9d-6a5566e8a5e7"
+      responses:
+        "200":
+          description: Follower removed successfully
+        "400":
+          description: Invalid id
+        "401":
+          description: unauthorized
+        "403":
+          description: User doesn't have permission to remove followers from this group
+        "404":
+          description: Follower not found.
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
+  
   /group/stop_following/{group_id}:
+    delete:
+      summary: Stop following a group
+      security: [bearerAuth: []]
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: UUID of the user
+          schema:
+            type: string
+            format: uuid
+            example: "c21f969b-5f03-4333-9a9d-6a5566e8a5e7"
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid id
+        "401":
+          description: unauthorized
+        "404":
+          description: Group not found.
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
+
   /group/get-location/{group_id}:
+    get:
+      summary: Get a group's current location. Granularity depends on the following tier.
+      security: [bearerAuth: []]
+      parameters:
+        - name: group_id
+          in: path
+          required: true
+          description: UUID of the group
+          schema:
+            type: string
+            format: uuid
+            example: "c21f969b-5f03-4333-9a9d-6a5566e8a5e7"
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid id
+        "401":
+          description: unauthorized
+        "403":
+          description: Doesn't have permission to get the group location
+        "404":
+          description: Group not found.
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
 
   /trip/get-trip-sumary/{trip_id}:
+    get:
+      summary: Get a trip's basic informaiton
+      security: [bearerAuth: []]
+      parameters:
+        - name: trip_id
+          in: path
+          required: true
+          description: UUID of the trip
+          schema:
+            type: string
+            format: uuid
+            example: "c21f969b-5f03-4333-9a9d-6a5566e8a5e7"
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid id
+        "401":
+          description: unauthorized
+        "403":
+          description: Doesn't have permission to view this trip
+        "404":
+          description: Trip not found.
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
+
   /trip/get-trip-details/{trip_id}:
+    get:
+      summary: Get a trip's complete informaiton
+      security: [bearerAuth: []]
+      parameters:
+        - name: trip_id
+          in: path
+          required: true
+          description: UUID of the trip
+          schema:
+            type: string
+            format: uuid
+            example: "c21f969b-5f03-4333-9a9d-6a5566e8a5e7"
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid id
+        "401":
+          description: unauthorized
+        "403":
+          description: Doesn't have permission to view this trip
+        "404":
+          description: Trip not found.
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
+
   /trip/list-trips/user/{user_id}:
+    get:
+      summary: List a user's trips
+      security: [bearerAuth: []]
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: UUID of the user
+          schema:
+            type: string
+            format: uuid
+            example: "c21f969b-5f03-4333-9a9d-6a5566e8a5e7"
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid id
+        "401":
+          description: unauthorized
+        "403":
+          description: Doesn't have permission to list this user's trip
+        "404":
+          description: User not found.
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
+
   /trip/list-trips/group/{group_id}:
+    get:
+      summary: List a groups's trips
+      security: [bearerAuth: []]
+      parameters:
+        - name: group_id
+          in: path
+          required: true
+          description: UUID of the group
+          schema:
+            type: string
+            format: uuid
+            example: "c21f969b-5f03-4333-9a9d-6a5566e8a5e7"
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid id
+        "401":
+          description: unauthorized
+        "403":
+          description: Doesn't have permission to list this group's trip
+        "404":
+          description: User not found.
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
+
   /trip/get-user-current-trip/{user_id}:
+    get:
+      summary: Fetch the current trip from a user
+      security: [bearerAuth: []]
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: UUID of the user
+          schema:
+            type: string
+            format: uuid
+            example: "c21f969b-5f03-4333-9a9d-6a5566e8a5e7"
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid id
+        "401":
+          description: unauthorized
+        "403":
+          description: Doesn't have permission to get this user's trip
+        "404":
+          description: User not found.
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
+
   /trip/get-group-current-trip/{group_id}:
+    get:
+      summary: Fetch the current trip from a group
+      security: [bearerAuth: []]
+      parameters:
+        - name: group_id
+          in: path
+          required: true
+          description: UUID of the group
+          schema:
+            type: string
+            format: uuid
+            example: "c21f969b-5f03-4333-9a9d-6a5566e8a5e7"
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid id
+        "401":
+          description: unauthorized
+        "403":
+          description: Doesn't have permission to get this group's trip
+        "404":
+          description: Group not found.
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
