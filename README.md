@@ -25,6 +25,8 @@ O presente repositório serve o papel de Wiki. Para acompanhar o desenvolvimento
 
 ## TO-DO
 
+- [ ] Estimativa de custos???
+  - [ ] Estimativa de tamanho de dados de loc???
 - [ ] Atualizar diagrama API com S3, Parameter Store e SES (EC2)
 - [x] Criar documento para volume final de TCC 1
 - [ ] Finalizar planejamento de database
