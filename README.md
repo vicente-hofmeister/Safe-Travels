@@ -19,22 +19,23 @@ O presente repositório serve o papel de Wiki. Para acompanhar o desenvolvimento
 - [Arquitetura do banco de dados (SQL)](docs/database/sql_database_model.dbml)
 - [Diagrama de modelagem do banco de dados (SQL)](docs/database/sql_diagram_light.png)
 - [Prototipação de telas](https://www.figma.com/files/team/1549549302352139474/project/452815529/Team-project?fuid=1141497352854255981)
-- [Diagrama de arquitetura da API](docs/architecture/api_architecture_diagram_v1.png)
-- [Diagrama da unidade computacional da API](docs/architecture/api_computational_unit_diagram_v1.png)
+- [Diagrama de arquitetura da API](docs/architecture/api_architecture_diagram_v2.png)
+- [Diagrama da Lambda de processamento da API](docs/architecture/api_processing_lambda_diagram_v2.png)
+- [Diagrama da Lambda de processamento da fila](docs/architecture/queue_processing_lambda_diagram_v2.png)
 - [One Drive com outros documentos](https://brpucrs-my.sharepoint.com/:f:/g/personal/v_hofmeister_edu_pucrs_br/Em8yZYhOW4xBpY9jZeVMPYoBS6WAZFX58U5XdOPTQgsgyw?e=eg4fgu)
 
 ## TO-DO
 
-- [ ] Atualizar diagrama API com S3, Parameter Store e SES (EC2)
+- [X] Atualizar diagrama API com S3, Parameter Store e SES (EC2)
 - [x] Criar documento para volume final de TCC 1
-- [ ] Finalizar planejamento de database
+- [X] Finalizar planejamento de database
   - [x] Finalizar mapeamento SQL
     - [x] Adicionar trips
   - [ ] Documentar / escrever sobre
 - [ ] Finalizar prototipação de telas
-  - [ ] Telas
+  - [ ] Telas 
   - [ ] Documentar
-- [ ] Finalizar mapeamento de endpoints
-  - [ ] Data Ingestion
-  - [ ] Data Feeding
-  - [ ] Social
+- [X] Finalizar mapeamento de endpoints
+  - [X] Data Ingestion
+  - [X] Data Feeding
+  - [X] Social
