@@ -26,16 +26,18 @@ O presente repositório serve o papel de Wiki. Para acompanhar o desenvolvimento
 
 ## TO-DO
 
-- [X] Atualizar diagrama API com S3, Parameter Store e SES (EC2)
+- [x] Atualizar diagrama API com S3, Parameter Store e SES (EC2)
+- [ ] Estimativa de custos???
+  - [ ] Estimativa de tamanho de dados de loc???
 - [x] Criar documento para volume final de TCC 1
-- [X] Finalizar planejamento de database
+- [x] Finalizar planejamento de database
   - [x] Finalizar mapeamento SQL
     - [x] Adicionar trips
   - [ ] Documentar / escrever sobre
 - [ ] Finalizar prototipação de telas
-  - [ ] Telas 
+  - [ ] Telas
   - [ ] Documentar
-- [X] Finalizar mapeamento de endpoints
-  - [X] Data Ingestion
-  - [X] Data Feeding
-  - [X] Social
+- [x] Finalizar mapeamento de endpoints
+  - [x] Data Ingestion
+  - [x] Data Feeding
+  - [x] Social
