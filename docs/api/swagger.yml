@@ -1114,3 +1114,27 @@ paths:
           description: Too many requests
         "500":
           description: Internal server error
+
+  /location/send-location:
+    post:
+      summary: Fallback endpoint to send location data if Kinesis fails.
+      security: [bearerAuth: []]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: Location data received successfully
+        "400":
+          description: Invalid data
+        "401":
+          description: unauthorized
+        "404":
+          description: user not found.
+        "429":
+          description: Too many requests
+        "500":
+          description: Internal server error
