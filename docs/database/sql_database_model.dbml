@@ -3,13 +3,13 @@ Table users {
   user_id varchar [default: `gen_random_uuid()`]
   username varchar [not null]
   name varchar [not null]
-  email varchar[] [not null]
+  e-mail varchar[] [not null]
   phone integer
   created_at timestamp [not null, default: `now()`]
   updated_at timestamp [not null, default: `now()`]
   deleted_at timestamp
   profile_image varchar
-  location_data_ref varchar [not null, default: "", note: "Default is user_id"]
+  location_data varchar [not null, default: "", note: "Default is user_id"]
   privacy_settings varchar [not null, default: "default"]
 
   indexes {
@@ -39,7 +39,7 @@ Table groups {
   updated_at timestamp [not null, default: `now()`]
   deleted_at timestamp
   profile_image varchar
-  location_data_ref varchar [not null, default: "", note: "Default is group_id"]
+  location_data varchar [not null, default: "", note: "Default is group_id"]
 
   indexes {
     group_id [pk]
@@ -66,7 +66,7 @@ Table trips {
   trip_image varchar
   start_date date [not null, default: `now()`]
   end_date date
-  location_data_ref varchar [not null, default: "", note: "Default is trip_id"]
+  location_data varchar [not null, default: "", note: "Default is trip_id"]
 
   indexes {
     trip_id [pk]
