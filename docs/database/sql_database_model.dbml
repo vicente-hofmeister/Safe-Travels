@@ -3,7 +3,7 @@ Table users {
   user_id varchar [default: `gen_random_uuid()`]
   username varchar [not null]
   name varchar [not null]
-  e-mail varchar[] [not null]
+  email varchar[] [not null]
   phone integer
   created_at timestamp [not null, default: `now()`]
   updated_at timestamp [not null, default: `now()`]
